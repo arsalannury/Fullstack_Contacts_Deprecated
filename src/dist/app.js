@@ -1,6 +1,8 @@
 "use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const UsersInterface = require("interfaces/users.interface");
 const express = require("express");
-const Router = require("./URL");
+const Router = require("URL");
 const fs = require("fs");
 const getAllJsonData = JSON.parse(fs.readFileSync("./jsons/GetAll.json", "utf-8"));
 const getUsers = JSON.parse(fs.readFileSync("./jsons/users.json", "utf-8"));
@@ -25,6 +27,9 @@ app.get(Router.Routes.USERS_ROUTE, (req, res) => {
     });
 });
 app.post(Router.Routes.USERS_ROUTE, (req, res) => {
+    const body = req.body;
+    if (!body.email || !body.first_name || !body.last_name) {
+    }
     getUsers.users.push(req.body);
     fs.writeFile("./jsons/users.json", JSON.stringify(getUsers), () => {
         res.json({
