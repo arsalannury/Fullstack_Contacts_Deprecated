@@ -31,3 +31,14 @@ app.get(Router.Routes.USERS_ROUTE, (req: any, res: any) => {
     data: getUsers,
   });
 });
+
+app.post(Router.Routes.USERS_ROUTE, (req: any, res: any) => {
+  getUsers.users.push(req.body);
+  fs.writeFile("./jsons/users.json", JSON.stringify(getUsers), () => {
+    res.json({
+      message: "success",
+      data: req.body,
+    });
+  });
+  res.send("api route is available");
+});
