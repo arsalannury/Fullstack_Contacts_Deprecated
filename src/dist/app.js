@@ -1,11 +1,19 @@
 "use strict";
 const express = require("express");
-const Router = require('./URL');
-// "start": "nodemon ./app.ts --w",
+const Router = require("./URL");
+const fs = require("fs");
+const getAllJsonData = JSON.parse(fs.readFileSync("./jsons/GetAll.json", "utf-8"));
 const app = express();
 const port = 8000;
 app.use(express.json());
 app.listen(port, () => {
     console.log(`server running at port ${port}`);
-    console.log(Router.Routes.BASE_ROUTE);
+});
+app.get(Router.Routes.BASE_ROUTE, (req, res) => {
+    res.status(200).json({
+        message: "success",
+        data: {
+            all: getAllJsonData,
+        },
+    });
 });
