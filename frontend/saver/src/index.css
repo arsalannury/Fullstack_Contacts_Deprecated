@@ -2,4 +2,14 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  scroll-behavior: smooth;
+}
+
+@font-face {
+  font-family: solidFont;
+  src: url("./fonts/fa-solid-900.ttf");
+}
+
+body {
+  font-family: solidFont;
 }
