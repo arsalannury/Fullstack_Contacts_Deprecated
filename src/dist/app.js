@@ -2,6 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 const express = require("express");
 const fs = require("fs");
+const { v4: v4uuid } = require("uuid");
 const port = 8000;
 const app = express();
 app.use(express.json());
@@ -20,6 +21,22 @@ app.get("/todos", (req, res) => {
         message: "success",
         results: todosJson.todos.length,
         data: todosJson,
+    });
+});
+app.post("/todos", (req, res) => {
+    const body = req.body;
+    if (!body.status || !body.title || !body.created_by || !body.priority) {
+        res.status(500).send("Error on the server ! check request data");
+        return;
+    }
+    todosJson.todos.push(req.body);
+    const lastIndexOfTodosJson = todosJson.todos.at(-1);
+    Object.assign(lastIndexOfTodosJson, { id: v4uuid() });
+    fs.writeFile("./jsons/todos.json", JSON.stringify(todosJson), () => {
+        res.status(200).json({
+            message: "success",
+            data: req.body,
+        });
     });
 });
 app.get("/dones", (req, res) => {

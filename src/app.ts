@@ -1,5 +1,6 @@
 const express = require("express");
 const fs = require("fs");
+const { v4: v4uuid } = require("uuid");
 import { Request, Response } from "express";
 
 const port = 8000 as const;
@@ -26,6 +27,25 @@ app.get("/todos", (req: Request, res: Response) => {
     message: "success",
     results: todosJson.todos.length,
     data: todosJson,
+  });
+});
+
+app.post("/todos", (req: Request, res: Response) => {
+  const body = req.body;
+  if (!body.status || !body.title || !body.created_by || !body.priority) {
+    res.status(500).send("Error on the server ! check request data");
+    return;
+  }
+
+  todosJson.todos.push(req.body);
+  const lastIndexOfTodosJson = todosJson.todos.at(-1);
+  Object.assign(lastIndexOfTodosJson, { id: v4uuid() });
+
+  fs.writeFile("./jsons/todos.json", JSON.stringify(todosJson), () => {
+    res.status(200).json({
+      message: "success",
+      data: req.body,
+    });
   });
 });
 
