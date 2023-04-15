@@ -1,12 +1,12 @@
 import { useState } from 'react'
-
-import './App.css'
+import {Box} from '@mui/material'
+import HeaderComponent from './components/Header/Header.component'
 
 function App() {
 
   return (
     <>
-    
+     <HeaderComponent />
     </>
   )
 }
