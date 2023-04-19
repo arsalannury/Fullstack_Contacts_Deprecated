@@ -7,7 +7,7 @@ const HeaderComponent: React.FC<any> = () => {
     <>
       <Box sx={HeaderBox}>
         <Typography sx={TitleStyle} component={"h1"} color={"ThreeDDarkShadow"}>
-          Data Saver
+            
         </Typography>
       </Box>
     </>
