@@ -1,55 +1,55 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const express = require("express");
+const { v4: uuidv4 } = require("uuid");
 const fs = require("fs");
-const { v4: v4uuid } = require("uuid");
-const port = 8000;
 const app = express();
 app.use(express.json());
-const readBasePage = fs.readFileSync("./templates/root.html", "utf-8");
-const todosJson = JSON.parse(fs.readFileSync("./jsons/todos.json", "utf-8"));
-const donesJson = JSON.parse(fs.readFileSync("./jsons/dones.json", "utf-8"));
-const expiresJson = JSON.parse(fs.readFileSync("./jsons/expires.json", "utf-8"));
-app.listen(port, () => {
-    console.log(`server start at port ${port} on http://localhost:3000`);
+const users = JSON.parse(fs.readFileSync("./json/users.json", "utf-8"));
+const PostRequestHandler = (res, req) => {
+    const body = req.body;
+    if (!body || !body.name || !body.username || !body.email) {
+        return res.status(500).end("Internal Server Error");
+    }
+};
+//? start server
+app.listen("8000", () => {
+    console.log("server start at port 8000");
 });
+//? GET api routes start
 app.get("/", (req, res) => {
-    res.status(200).send(readBasePage);
+    res.status(200).end("main route is available");
 });
-app.get("/todos", (req, res) => {
+app.get("/users", (req, res) => {
     res.status(200).json({
         message: "success",
-        results: todosJson.todos.length,
-        data: todosJson,
+        results: users.length,
+        data: users,
     });
 });
-app.post("/todos", (req, res) => {
-    const body = req.body;
-    if (!body.status || !body.title || !body.created_by || !body.priority) {
-        res.status(500).send("Error on the server ! check request data");
-        return;
-    }
-    todosJson.todos.push(req.body);
-    const lastIndexOfTodosJson = todosJson.todos.at(-1);
-    Object.assign(lastIndexOfTodosJson, { id: v4uuid() });
-    fs.writeFile("./jsons/todos.json", JSON.stringify(todosJson), () => {
+//? GET api routes end
+//? POST api routes start
+app.post("/users", (req, res) => {
+    PostRequestHandler(res, req);
+    const dataUpdated = Object.assign({ id: uuidv4() }, req.body);
+    users.push(dataUpdated);
+    fs.writeFile("./json/users.json", JSON.stringify(users), (data) => {
         res.status(200).json({
             message: "success",
-            data: req.body,
+            data: dataUpdated,
         });
     });
 });
-app.get("/dones", (req, res) => {
-    res.status(200).json({
-        message: "success",
-        results: donesJson.dones.length,
-        data: donesJson,
-    });
+//? POST api routes end
+//? UPDATE api routes start
+app.patch("/users/:id", (req, res) => {
+    PostRequestHandler(res, req);
+    res.send("success patch request!");
 });
-app.get("/expires", (req, res) => {
-    res.status(200).jsonp({
-        message: "success",
-        results: expiresJson.expires.length,
-        data: expiresJson,
-    });
+//? UPDATE api routes end
+//? DELETE api routes start
+app.delete("/users/:id", (req, res) => {
+    PostRequestHandler(res, req);
+    res.end("success delete request!");
 });
+//? DELETE api routes end

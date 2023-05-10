@@ -1,10 +1,11 @@
-import { useState } from "react";
-import HeaderComponent from "./components/Header/Header.component";
+import { useState } from 'react'
+import {Box} from '@mui/material'
+import HeaderComponent from './components/Header/Header.component'
 
 function App() {
   return (
     <>
-      <HeaderComponent />
+     <HeaderComponent />
     </>
   );
 }

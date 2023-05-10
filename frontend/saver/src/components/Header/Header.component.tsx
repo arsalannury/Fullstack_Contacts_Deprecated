@@ -1,13 +1,15 @@
 import React from "react";
-import { Box, Container } from "@mui/material";
-import './header.css';
+import { Box, Typography } from "@mui/material";
+import { HeaderBox, TitleStyle } from "./Header.styles";
 
 const HeaderComponent: React.FC<any> = () => {
   return (
     <>
-        <Box className="header-box">
-          <h1>Data Saver</h1>
-        </Box>
+      <Box sx={HeaderBox}>
+        <Typography sx={TitleStyle} component={"h1"} color={"ThreeDDarkShadow"}>
+            
+        </Typography>
+      </Box>
     </>
   );
 };

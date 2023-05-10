@@ -3,13 +3,15 @@
   padding: 0;
   box-sizing: border-box;
   scroll-behavior: smooth;
+  font-size: 16px;
 }
 
 @font-face {
-  font-family: solidFont;
-  src: url("./fonts/fa-solid-900.ttf");
+  font-family: Kanit;
+  src: url("./fonts/Kanit-SemiBoldItalic.ttf");
 }
 
 body {
-  font-family: solidFont;
+  font-family: Kanit;
+  background-color: #eee;
 }
