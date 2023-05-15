@@ -7,7 +7,7 @@
     "test": "jest",
     "build": "npx tsc",
     "start": "node dist/server.js",
-    "dev": "concurrently -k \"tsc -p ./server.ts -w\" \"nodemon ./dist/server.js\""
+    "dev": "concurrently -k \"tsc -p ./setupServer/server.ts -w\" \"nodemon ./dist/server.js\""
   },
   "author": "arsalan nury",
   "license": "ISC",
