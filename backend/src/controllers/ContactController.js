@@ -82,7 +82,23 @@ exports.updateContact = (req, res, next) => {
     return res.status(400).send("miss some properties");
   }
 
- 
-  res.send("test");
-  next();
+  const filterContacts = JSON.parse(getAllData).data.map((cont) => {
+    if (cont.id === id) {
+      const updated = { ...cont, ...req.body };
+      cont = updated;
+    }
+    return cont;
+  });
+
+  const finalStructJSON = {
+    data: filterContacts,
+  };
+
+  fs.writeFile("db/contact.json", JSON.stringify(finalStructJSON), () => {
+    res.status(200).json({
+      message: "success",
+      result: "contact updated successfully",
+    });
+    next();
+  });
 };
