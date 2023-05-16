@@ -1,0 +1,21 @@
+{
+  "extends": ["airbnb", "prettier", "plugin:node/recommended"],
+  "plugins": ["prettier"],
+  "rules": {
+    // "prettier/prettier": "error",
+    "spaced-comment": "off",
+    "no-console": "error",
+    "consistent-return": "error",
+    "func-names": "error",
+    "comma-spacing": "error",
+    "semi": "error",
+    "semi-spacing": "error",
+    "no-else-return": "error",
+    "no-unused-labels": "error"
+  },
+  "parserOptions": { "ecmaVersion": "latest" },
+  "import/no-extraneous-dependencies": [
+    "error",
+    { "devDependencies": false, "optionalDependencies": false, "peerDependencies": false }
+  ]
+}
