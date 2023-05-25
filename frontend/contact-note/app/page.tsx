@@ -5,7 +5,12 @@ export default function Home() {
   return (
     <>
       <div className={styles.headBox}>
-        <Image src="/contact.png" width={400} height={400} alt="contact logo" />
+        <Image src="/contact.png" width={200} height={200} alt="contact logo" />
+      </div>
+      <div className='w-full'>
+        <div className='w-9/12'>
+          fsdfdfdf
+         </div>
       </div>
     </>
   );
