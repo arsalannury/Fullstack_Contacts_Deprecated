@@ -1,4 +1,6 @@
+import Image from "next/image";
 import "./globals.css";
+import styles from "./page.module.css";
 import { Inter } from "next/font/google";
 
 const inter = Inter({ subsets: ["latin"] });
@@ -15,7 +17,19 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+      <body className={inter.className}>
+        <div className={styles.headBox}>
+          <Image
+            src="/contact.png"
+            width={200}
+            height={200}
+            alt="contact logo"
+          />
+        </div>
+        <div className="w-full flex items-center justify-center">
+          <div className="lg:w-9/12 w-full bg-slate-50 p-4">{children}</div>
+        </div>
+      </body>
     </html>
   );
 }
