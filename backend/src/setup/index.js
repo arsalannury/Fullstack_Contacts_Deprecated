@@ -2,7 +2,7 @@ const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
 const dotenv = require("dotenv");
-const favorite_route = require("../routes/favorites_route");
+const contacts_route = require("../routes/contacts_route");
 
 const corsOriginOption = {
   origin: "http://localhost:8000",
@@ -10,7 +10,7 @@ const corsOriginOption = {
 dotenv.config({ path: "./config.env" });
 const mongoString = process.env.DATABASE_URL;
 
-mongoose.connect(mongoString, { useNewUrlParser: true });
+mongoose.connect(mongoString);
 const database = mongoose.connection;
 
 database.on("error", (error) => {
@@ -24,6 +24,6 @@ database.once("connected", () => {
 const application = express();
 application.use(express.json());
 application.use(cors(corsOriginOption));
-application.use("/favorites", favorite_route);
+application.use("/contacts", contacts_route);
 
 module.exports = application;
