@@ -1,4 +1,3 @@
-import styles from "./page.module.css";
 import Image from "next/image";
 
 export default async function Home() {
@@ -14,7 +13,7 @@ export default async function Home() {
                border border-slate-400
                rounded-3xl indent-5 text-sm placeholder:text-sm text-slate-600"
         />
-        <button className="outline-none rounded px-4 py-2 bg-gray-800 text-white shadow-lg font-bold">
+        <button className="outline-none transition-all rounded px-4 py-2 bg-gray-800 text-white shadow-lg font-bold hover:scale-110">
           +
         </button>
       </div>
