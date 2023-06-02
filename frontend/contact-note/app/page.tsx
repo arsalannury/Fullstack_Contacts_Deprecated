@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 
 export default async function Home() {
   return (
@@ -13,9 +14,14 @@ export default async function Home() {
                border border-slate-400
                rounded-3xl indent-5 text-sm placeholder:text-sm text-slate-600"
         />
-        <button className="outline-none transition-all rounded px-4 py-2 bg-gray-800 text-white shadow-lg font-bold hover:scale-110">
-          +
-        </button>
+        <Link href={'/create-contact'}>
+          <Image
+            alt="add contact"
+            src="/add-contact.png"
+            width={50}
+            height={50}
+          />
+        </Link>
       </div>
     </>
   );
