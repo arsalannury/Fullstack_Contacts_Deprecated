@@ -17,7 +17,6 @@ const Form: React.FC<IProps> = (props) => {
       <select
         title="select"
         {...props}
-        style={{ fontFamily: "IRAN_SANS" }}
         className="focus:shadow-md
                appearance-none
                p-2 m-14 lg:w-1/3 md:w-2/3 w-full

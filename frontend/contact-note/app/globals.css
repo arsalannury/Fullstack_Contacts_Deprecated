@@ -9,13 +9,6 @@
   margin: 0;
 }
 
-html,
-body {
-  max-width: 100vw;
-  overflow-x: hidden;
-  background-color: #212529;
-}
-
 @font-face {
   font-family: IRAN_SANS;
   src: url("../font/Iranian\ Sans.ttf");
@@ -24,4 +17,12 @@ body {
 @font-face {
   font-family: Acme;
   src: url("../font/Acme-Regular.ttf");
+}
+
+html,
+body {
+  max-width: 100vw;
+  overflow-x: hidden;
+  background-color: #212529;
+  font-family: "IRAN_SANS", "Acme" !important;
 }

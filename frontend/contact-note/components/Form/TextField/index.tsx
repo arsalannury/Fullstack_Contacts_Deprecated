@@ -15,7 +15,6 @@ const Form: React.FC<IProps> = (props) => {
   return (
     <>
       <input
-        style={{ fontFamily: "IRAN_SANS ,Acme" }}
         {...props}
         className={`focus:shadow-md
                p-2 m-14 lg:w-1/3 md:w-2/3 w-full
