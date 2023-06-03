@@ -1,6 +1,7 @@
 "use client";
 
 import TextField from "@/components/Form/TextField";
+import Select from "@/components/Form/Select";
 import React, { useState } from "react";
 
 interface Contacts {
@@ -44,6 +45,23 @@ const CreateContact = () => {
           onChange={(event) => handleChangeInput(event)}
           value={contacts.number}
         />
+        <Select
+          placeholder="Save device"
+          id="saveDevice"
+          name="saveDevice"
+          onChange={(event) => handleChangeInput(event)}
+          value={contacts.saveDevice}
+        >
+          <option value="phone" id="phone">
+            phone
+          </option>
+          <option selected value="pc" id="pc">
+            pc
+          </option>
+          <option value="email" id="email">
+            email
+          </option>
+        </Select>
       </form>
     </>
   );

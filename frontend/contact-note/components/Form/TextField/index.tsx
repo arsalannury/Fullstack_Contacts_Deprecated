@@ -17,8 +17,9 @@ const Form: React.FC<IProps> = (props) => {
       <input
         {...props}
         className="focus:shadow-md
-               p-2 m-2 lg:w-1/3 md:w-2/3 w-full
+               p-2 m-5 lg:w-1/3 md:w-2/3 w-full
                outline-none
+               block
                border border-slate-400
                rounded-3xl indent-5 text-sm placeholder:text-sm text-slate-600"/>
     </>
