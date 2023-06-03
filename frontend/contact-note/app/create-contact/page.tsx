@@ -3,12 +3,14 @@
 import TextField from "@/components/Form/TextField";
 import Select from "@/components/Form/Select";
 import React, { useState } from "react";
+import Upload from "@/components/Form/Upload";
+import getBase64 from "@/helper";
 
 interface Contacts {
   saveDevice: string;
   name: string;
   number: string;
-  background: string;
+  background: any;
 }
 
 const CreateContact = () => {
@@ -19,11 +21,18 @@ const CreateContact = () => {
     background: "",
   });
 
-  const handleChangeInput = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChangeInput = (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
     const { name: targetName } = event.target;
     const newContacts = { ...contacts };
     newContacts[targetName as keyof Contacts] = event.target.value;
     setContacts(newContacts);
+  };
+
+  const handleChangeContactPhoto = async (file: any) => {
+    const toBase64 = await getBase64(file);
+    setContacts({ ...contacts, background: toBase64 });
   };
 
   return (
@@ -55,7 +64,7 @@ const CreateContact = () => {
           <option value="phone" id="phone">
             phone
           </option>
-          <option selected value="pc" id="pc">
+          <option value="pc" id="pc">
             pc
           </option>
           <option value="email" id="email">
@@ -63,6 +72,18 @@ const CreateContact = () => {
           </option>
         </Select>
       </form>
+      <Upload onChange={handleChangeContactPhoto} />
+      <div className="flex items-center justify-end w-12/12">
+        <button
+          className="outline-none border
+                           border-dashed border-slate-700
+                           p-3 bg-white transition-all
+                         hover:text-white hover:bg-lime-900
+                          hover:border-lime-900"
+        >
+          create
+        </button>
+      </div>
     </>
   );
 };

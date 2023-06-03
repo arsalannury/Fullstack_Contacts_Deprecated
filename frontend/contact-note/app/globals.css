@@ -15,3 +15,13 @@ body {
   overflow-x: hidden;
   background-color: #212529;
 }
+
+@font-face {
+  font-family: IRAN_SANS;
+  src: url("../font/Iranian\ Sans.ttf");
+}
+
+@font-face {
+  font-family: Acme;
+  src: url("../font/Acme-Regular.ttf");
+}
