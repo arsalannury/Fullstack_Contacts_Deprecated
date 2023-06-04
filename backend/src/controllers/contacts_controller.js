@@ -29,3 +29,16 @@ exports.create_contacts = async (req, res, next) => {
   }
   next();
 };
+
+exports.getAll_contacts = async (req, res, next) => {
+  try {
+    const findAll = await ContactModel.find();
+    res.status(200).json({
+      message: "success",
+      data: findAll,
+    });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+  next();
+};
