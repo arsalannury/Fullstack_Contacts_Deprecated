@@ -3,9 +3,11 @@
 import TextField from "@/components/Form/TextField";
 import Select from "@/components/Form/Select";
 import React, { useState } from "react";
+import { useRouter } from "next/navigation";
 import Upload from "@/components/Form/Upload";
 import getBase64 from "@/helper";
 import { useForm, SubmitHandler } from "react-hook-form";
+import { BaseURL } from "@/BaseURL";
 
 interface Contacts {
   saveDevice: string;
@@ -14,7 +16,7 @@ interface Contacts {
   background: any;
 }
 
-const onSubmit: SubmitHandler<Contacts> = (data) => console.log(data);
+// const onSubmit: SubmitHandler<Contacts> = (data) => console.log(data);
 
 const CreateContact = () => {
   const [contacts, setContacts] = useState<Contacts>({
@@ -23,11 +25,15 @@ const CreateContact = () => {
     number: "",
     background: "",
   });
+  const [progress, inProgress] = useState<boolean>(false);
+  const [request, inRequest] = useState<string>("default");
   const {
     register,
     formState: { errors },
     handleSubmit,
   } = useForm<Contacts>();
+
+  const router = useRouter();
 
   const handleChangeInput = (
     event: React.ChangeEvent<HTMLInputElement>
@@ -43,9 +49,24 @@ const CreateContact = () => {
     setContacts({ ...contacts, background: toBase64 });
   };
 
+  const handleCreateContact = async () => {
+    inProgress(true);
+    await BaseURL.post("/contacts", contacts);
+    try {
+      inProgress(false);
+      inRequest("success");
+      setTimeout(() => {
+        router.push("/");
+      }, 2000);
+    } catch (error) {
+      inProgress(false);
+      inRequest("failed");
+    }
+  };
+
   return (
     <>
-      <form onSubmit={handleSubmit(onSubmit)}>
+      <form onSubmit={handleSubmit(handleCreateContact)}>
         <TextField
           reacthookformerror={errors}
           registerhookform={register}
@@ -95,10 +116,23 @@ const CreateContact = () => {
                          hover:text-white hover:bg-lime-900
                           hover:border-lime-900"
           >
-            create
+            {progress ? "..." : "create"}
           </button>
         </div>
       </form>
+      <span
+        className={
+          request === "success" ? "text-lime-800" : "text-red-900"
+        }
+      >
+        {request === "default"
+          ? ""
+          : "success"
+          ? "contact saved successfuly"
+          : "failed"
+          ? "something wrong to save contact !"
+          : ""}
+      </span>
     </>
   );
 };

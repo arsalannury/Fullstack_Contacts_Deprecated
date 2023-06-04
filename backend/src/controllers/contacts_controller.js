@@ -1,9 +1,15 @@
 const mongoose = require("mongoose");
 const ContactModel = require("../models/contacts_model");
 
-exports.create_contacts_validation = (req, res) => {
-  if (!req.body.name || !req.body.number || !req.body.background) {
-    return res.status(400).send("bad request recieved");
+exports.create_contacts_validation = (req, res, next) => {
+  if (
+    req.body.name === undefined ||
+    req.body.number === undefined ||
+    req.body.background === undefined
+  ) {
+    res.status(400).send("bad request recieved");
+  } else {
+    next();
   }
 };
 
@@ -16,9 +22,10 @@ exports.create_contacts = async (req, res, next) => {
   });
 
   try {
-    const saveTodb = dataSaved.save();
-    return res.status(200).json(saveTodb);
+    const saveTodb = await dataSaved.save();
+    res.status(200).json(saveTodb);
   } catch (error) {
     res.status(400).json({ message: error.message });
   }
+  next();
 };

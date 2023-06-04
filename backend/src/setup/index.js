@@ -5,7 +5,7 @@ const dotenv = require("dotenv");
 const contacts_route = require("../routes/contacts_route");
 
 const corsOriginOption = {
-  origin: "http://localhost:8000",
+  origin: "*",
 };
 dotenv.config({ path: "./config.env" });
 const mongoString = process.env.DATABASE_URL;

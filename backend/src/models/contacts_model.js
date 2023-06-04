@@ -14,7 +14,7 @@ const contacts_model = new mongoose.Schema({
     type: String,
   },
   background: {
-    required: true,
+    required: false,
     type: String,
   },
 });
