@@ -5,6 +5,7 @@ import Select from "@/components/Form/Select";
 import React, { useState } from "react";
 import Upload from "@/components/Form/Upload";
 import getBase64 from "@/helper";
+import { useForm, SubmitHandler } from "react-hook-form";
 
 interface Contacts {
   saveDevice: string;
@@ -13,6 +14,8 @@ interface Contacts {
   background: any;
 }
 
+const onSubmit: SubmitHandler<Contacts> = (data) => console.log(data);
+
 const CreateContact = () => {
   const [contacts, setContacts] = useState<Contacts>({
     saveDevice: "",
@@ -20,6 +23,11 @@ const CreateContact = () => {
     number: "",
     background: "",
   });
+  const {
+    register,
+    formState: { errors },
+    handleSubmit,
+  } = useForm<Contacts>();
 
   const handleChangeInput = (
     event: React.ChangeEvent<HTMLInputElement>
@@ -37,8 +45,10 @@ const CreateContact = () => {
 
   return (
     <>
-      <form>
+      <form onSubmit={handleSubmit(onSubmit)}>
         <TextField
+          reacthookformerror={errors}
+          registerhookform={register}
           placeholder="Full name"
           id="name"
           name="name"
@@ -47,6 +57,8 @@ const CreateContact = () => {
           value={contacts.name}
         />
         <TextField
+          registerhookform={register}
+          reacthookformerror={errors}
           placeholder="Number"
           id="number"
           name="number"
@@ -55,6 +67,8 @@ const CreateContact = () => {
           value={contacts.number}
         />
         <Select
+          registerhookform={register}
+          reacthookformerror={errors}
           placeholder="Save device"
           id="saveDevice"
           name="saveDevice"
@@ -71,19 +85,20 @@ const CreateContact = () => {
             email
           </option>
         </Select>
-      </form>
-      <Upload onChange={handleChangeContactPhoto} />
-      <div className="flex items-center justify-end w-12/12">
-        <button
-          className="outline-none border
+        <Upload onChange={handleChangeContactPhoto} />
+        <div className="flex items-center justify-end w-12/12">
+          <button
+            type="submit"
+            className="outline-none border
                            border-dashed border-slate-700
                            p-3 bg-white transition-all
                          hover:text-white hover:bg-lime-900
                           hover:border-lime-900"
-        >
-          create
-        </button>
-      </div>
+          >
+            create
+          </button>
+        </div>
+      </form>
     </>
   );
 };
