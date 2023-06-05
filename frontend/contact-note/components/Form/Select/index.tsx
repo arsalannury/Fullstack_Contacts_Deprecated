@@ -7,10 +7,7 @@ interface IProps {
   id: undefined | string;
   value: string;
   placeholder: string;
-  onChange: React.ChangeEventHandler<any>;
-  children: React.ReactNode;
-  reacthookformerror: any;
-  registerhookform: any;
+  onChange: React.ChangeEventHandler<HTMLSelectElement>;
 }
 
 const Form: React.FC<IProps> = (props) => {
@@ -19,8 +16,6 @@ const Form: React.FC<IProps> = (props) => {
       <select
         title="select"
         {...props}
-        {...props.registerhookform(props.name, {
-          required: true})}
         className="focus:shadow-md
                appearance-none
                p-2 lg:w-1/3 md:w-2/3 w-full
@@ -29,11 +24,10 @@ const Form: React.FC<IProps> = (props) => {
                border border-slate-400
                rounded-3xl indent-5 text-sm placeholder:text-sm text-slate-600"
       >
-        {props.children}
+        <option>phone</option>
+        <option>pc</option>
+        <option>email</option>
       </select>
-      {props.reacthookformerror[props.name] && (
-        <span className="text-red-800 text-sm ml-2">{`${props.name} is required`}</span>
-      )}
     </div>
   );
 };

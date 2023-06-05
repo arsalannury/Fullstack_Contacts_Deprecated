@@ -36,9 +36,10 @@ const CreateContact = () => {
   const router = useRouter();
 
   const handleChangeInput = (
-    event: React.ChangeEvent<HTMLInputElement>
+    event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
   ) => {
     const { name: targetName } = event.target;
+    console.log(targetName);
     const newContacts = { ...contacts };
     newContacts[targetName as keyof Contacts] = event.target.value;
     setContacts(newContacts);
@@ -88,24 +89,12 @@ const CreateContact = () => {
           value={contacts.number}
         />
         <Select
-          registerhookform={register}
-          reacthookformerror={errors}
           placeholder="Save device"
           id="saveDevice"
           name="saveDevice"
           onChange={(event) => handleChangeInput(event)}
           value={contacts.saveDevice}
-        >
-          <option value="phone" id="phone">
-            phone
-          </option>
-          <option value="pc" id="pc">
-            pc
-          </option>
-          <option value="email" id="email">
-            email
-          </option>
-        </Select>
+        />
         <Upload onChange={handleChangeContactPhoto} />
         <div className="flex items-center justify-end w-12/12">
           <button
