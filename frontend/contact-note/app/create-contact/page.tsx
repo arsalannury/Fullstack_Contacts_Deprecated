@@ -39,7 +39,6 @@ const CreateContact = () => {
     event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
   ) => {
     const { name: targetName } = event.target;
-    console.log(targetName);
     const newContacts = { ...contacts };
     newContacts[targetName as keyof Contacts] = event.target.value;
     setContacts(newContacts);

@@ -33,12 +33,26 @@ export default async function Home() {
           data?.data?.data.map((cont: any, index: number) => {
             return (
               <>
-                <Image
-                  src={cont.background}
-                  width={60}
-                  height={60}
-                  alt="contact photo"
-                />
+                <Link href={`/${cont._id}`}>
+                  <div
+                    className="
+                  hover:scale-105 hover:shadow-2xl hover:border-b-[1px] border-purple-950 transition-all
+                  flex items-center justify-start xl:w-6/12 w-12/12 m-8 shadow-lg p-4 cursor-pointer rounded-lg"
+                  >
+                    <Image
+                      src={cont.background}
+                      width={60}
+                      height={60}
+                      alt="contact photo"
+                    />
+                    <p className="text-xs ml-6 font-bold">
+                      {cont.name}
+                    </p>
+                    <p className="text-xs p-2 rounded-lg bg-purple-950 text-white ml-auto">
+                      {cont.saveDevice}
+                    </p>
+                  </div>
+                </Link>
               </>
             );
           })
