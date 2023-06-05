@@ -42,3 +42,17 @@ exports.getAll_contacts = async (req, res, next) => {
   }
   next();
 };
+
+exports.get_contacts_by_id = async (req, res, next) => {
+  const id = req.params.id;
+  try {
+    const findContact = await ContactModel.findById(id);
+    res.status(200).json({
+      message: "success",
+      data: findContact,
+    });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+  next();
+};
