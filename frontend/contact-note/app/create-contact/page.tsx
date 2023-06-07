@@ -31,6 +31,8 @@ const CreateContact = (props: any) => {
     register,
     formState: { errors },
     handleSubmit,
+    getValues,
+    setValue,
   } = useForm<Contacts>();
 
   const router = useRouter();
@@ -68,20 +70,19 @@ const CreateContact = (props: any) => {
   };
 
   const handleUpdateContact = async () => {
-     inProgress(true);
-     await BaseURL.patch(`/contacts/${contactId}`, contacts);
-     try {
-       inProgress(false);
-       inRequest("success");
-       setTimeout(() => {
-         router.push("/");
-       }, 2000);
-     } catch (error) {
-       inProgress(false);
-       inRequest("failed");
-     }
-  }
-
+    inProgress(true);
+    await BaseURL.patch(`/contacts/${contactId}`, contacts);
+    try {
+      inProgress(false);
+      inRequest("success");
+      setTimeout(() => {
+        router.push("/");
+      }, 2000);
+    } catch (error) {
+      inProgress(false);
+      inRequest("failed");
+    }
+  };
 
   useEffect(() => {
     const clientSideFetchContact = async () => {
@@ -94,6 +95,8 @@ const CreateContact = (props: any) => {
           number: finalData.number,
           saveDevice: finalData.saveDevice,
         });
+        setValue("name", finalData.name);
+        setValue("number", finalData.number);
       } catch (error) {
         throw new Error("something wrong");
       }
@@ -105,7 +108,13 @@ const CreateContact = (props: any) => {
 
   return (
     <>
-      <form onSubmit={contactId ? handleSubmit(handleUpdateContact) : handleSubmit(handleCreateContact)}>
+      <form
+        onSubmit={
+          contactId
+            ? handleSubmit(handleUpdateContact)
+            : handleSubmit(handleCreateContact)
+        }
+      >
         <TextField
           reacthookformerror={errors}
           registerhookform={register}
@@ -148,7 +157,10 @@ const CreateContact = (props: any) => {
         </div>
       </form>
       <span
-        className={request === "success" ? "text-lime-800" : "text-red-900"}>
+        className={
+          request === "success" ? "text-lime-800" : "text-red-900"
+        }
+      >
         {request === "default"
           ? ""
           : "success"
