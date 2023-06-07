@@ -44,6 +44,8 @@ export default async function Home() {
                       width={60}
                       height={60}
                       alt="contact photo"
+                      placeholder="blur"
+                      blurDataURL={cont.background}
                     />
                     <p className="text-xs ml-6 font-bold">
                       {cont.name}

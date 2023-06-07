@@ -56,3 +56,17 @@ exports.get_contacts_by_id = async (req, res, next) => {
   }
   next();
 };
+
+exports.update_contact_by_id = async (req, res, next) => {
+  const id = req.params.id;
+  try {
+    const findById = await ContactModel.findByIdAndUpdate(id, req.body,{timestamps: true});
+    res.status(200).json({
+      message: "success",
+      data: findById,
+    });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+  next();
+};

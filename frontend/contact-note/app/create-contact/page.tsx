@@ -2,7 +2,7 @@
 
 import TextField from "@/components/Form/TextField";
 import Select from "@/components/Form/Select";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import Upload from "@/components/Form/Upload";
 import getBase64 from "@/helper";
@@ -18,7 +18,7 @@ interface Contacts {
 
 // const onSubmit: SubmitHandler<Contacts> = (data) => console.log(data);
 
-const CreateContact = () => {
+const CreateContact = (props: any) => {
   const [contacts, setContacts] = useState<Contacts>({
     saveDevice: "",
     name: "",
@@ -34,6 +34,9 @@ const CreateContact = () => {
   } = useForm<Contacts>();
 
   const router = useRouter();
+  const contactId = props.searchParams.contactId
+    ? props.searchParams.contactId
+    : null;
 
   const handleChangeInput = (
     event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
@@ -64,9 +67,45 @@ const CreateContact = () => {
     }
   };
 
+  const handleUpdateContact = async () => {
+     inProgress(true);
+     await BaseURL.patch(`/contacts/${contactId}`, contacts);
+     try {
+       inProgress(false);
+       inRequest("success");
+       setTimeout(() => {
+         router.push("/");
+       }, 2000);
+     } catch (error) {
+       inProgress(false);
+       inRequest("failed");
+     }
+  }
+
+
+  useEffect(() => {
+    const clientSideFetchContact = async () => {
+      const result = await BaseURL.get(`/contacts/${contactId}`);
+      try {
+        const finalData = result.data.data;
+        setContacts({
+          name: finalData.name,
+          background: finalData.background,
+          number: finalData.number,
+          saveDevice: finalData.saveDevice,
+        });
+      } catch (error) {
+        throw new Error("something wrong");
+      }
+    };
+    if (contactId) {
+      clientSideFetchContact();
+    }
+  }, []);
+
   return (
     <>
-      <form onSubmit={handleSubmit(handleCreateContact)}>
+      <form onSubmit={contactId ? handleSubmit(handleUpdateContact) : handleSubmit(handleCreateContact)}>
         <TextField
           reacthookformerror={errors}
           registerhookform={register}
@@ -104,15 +143,12 @@ const CreateContact = () => {
                          hover:text-white hover:bg-lime-900
                           hover:border-lime-900"
           >
-            {progress ? "..." : "create"}
+            {progress ? "..." : contactId ? "update" : "create"}
           </button>
         </div>
       </form>
       <span
-        className={
-          request === "success" ? "text-lime-800" : "text-red-900"
-        }
-      >
+        className={request === "success" ? "text-lime-800" : "text-red-900"}>
         {request === "default"
           ? ""
           : "success"
