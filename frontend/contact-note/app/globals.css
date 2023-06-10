@@ -26,3 +26,16 @@ body {
   background-color: #212529;
   font-family: "IRAN_SANS", "Acme" !important;
 }
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-track {
+  background: #350449;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #842aa8;
+}
+::-webkit-scrollbar-thumb {
+  background: #9d3cc3;
+}

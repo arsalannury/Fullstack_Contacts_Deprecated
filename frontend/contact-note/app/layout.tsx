@@ -27,7 +27,13 @@ export default function RootLayout({
           />
         </div>
         <div className="w-full flex items-center justify-center">
-          <div className="lg:w-9/12 w-full bg-slate-50 p-4">{children}</div>
+          <div
+            className={
+              "lg:w-9/12 w-full bg-slate-50 p-4 max-h-[600px] overflow-auto"
+            }
+          >
+            {children}
+          </div>
         </div>
       </body>
     </html>
