@@ -8,7 +8,7 @@
     "build": "npx tsc",
     "start": "node dist/server.js",
     "dev": "node ./setup/server.js",
-    "server": "nodemon ./setup/server.js"
+    "server": "node ./setup/server.js"
   },
   "author": "arsalan nury",
   "license": "ISC",
