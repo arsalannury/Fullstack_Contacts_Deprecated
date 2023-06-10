@@ -6,7 +6,7 @@
   "scripts": {
     "test": "jest",
     "build": "npx tsc",
-    "start": "node setup/server.js",
+    "start": "node ./setup/server.js",
     "dev": "node ./setup/server.js",
     "server": "node ./setup/server.js"
   },
