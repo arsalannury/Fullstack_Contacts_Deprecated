@@ -2,13 +2,13 @@
   "name": "nodejs",
   "version": "1.0.0",
   "description": "training project with node and express js",
-  "main": "server.js",
+  "main": "index.js",
   "scripts": {
     "test": "jest",
     "build": "npx tsc",
-    "start": "node ./setup/server.js",
-    "dev": "node ./setup/server.js",
-    "server": "node ./setup/server.js"
+    "start": "node ./setup/index.js",
+    "dev": "node ./setup/index.js",
+    "server": "node ./setup/index.js"
   },
   "author": "arsalan nury",
   "license": "ISC",

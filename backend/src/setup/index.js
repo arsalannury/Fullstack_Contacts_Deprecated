@@ -22,6 +22,11 @@ database.once("connected", () => {
 });
 
 const application = express();
+
+application.listen(8000, () => {
+  console.log("server start on port 8000");
+});
+
 application.use(express.json());
 application.use(cors(corsOriginOption));
 application.use("/contacts", contacts_route);
