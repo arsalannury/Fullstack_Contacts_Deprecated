@@ -10,7 +10,7 @@ export default async function Home() {
   return (
     <>
       <div className="flex items-center justify-between">
-        <input
+        {/* <input
           type="text"
           placeholder="search contacts"
           className="focus:shadow-md
@@ -18,7 +18,7 @@ export default async function Home() {
                outline-none
                border border-slate-400
                rounded-3xl indent-5 text-sm placeholder:text-sm text-slate-600"
-        />
+        /> */}
         <Link href={"/create-contact"}>
           <Image
             alt="add contact"
