@@ -6,7 +6,7 @@ export const revalidate = 10;
 
 const ContactDetail = async (props: any) => {
    const data = await fetch(
-     `http://127.0.0.1:8000/contacts/${props.params.contactid}`,
+     `http://localhost:8000/contacts/${props.params.contactid}`,
      {
        next: { revalidate: 10 },
      }

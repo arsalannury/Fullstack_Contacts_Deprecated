@@ -73,7 +73,7 @@ const CreateContact = (props: any) => {
   const handleUpdateContact = async () => {
     inProgress(true);
     await axios.patch(
-      `http://127.0.0.1:8000/contacts/${contactId}`,
+      `http://localhost:8000/contacts/${contactId}`,
       contacts
     );
     try {
@@ -91,7 +91,7 @@ const CreateContact = (props: any) => {
   useEffect(() => {
     const clientSideFetchContact = async () => {
       const result = await axios.get(
-        `http://127.0.0.1:8000/contacts/${contactId}`
+        `http://localhost:8000/contacts/${contactId}`
       );
       try {
         const finalData = result.data.data;

@@ -2,7 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 
 export default async function Home() {
-  const data = await fetch("http://127.0.0.1:8000/contacts", {
+  const data = await fetch("http://localhost:8000/contacts", {
     next: { revalidate: 10 },
   });
   const result = await data.json();
