@@ -1,5 +1,3 @@
-import { BaseURL } from "@/BaseURL";
-import axios from "axios";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
@@ -7,9 +5,14 @@ import React from "react";
 export const revalidate = 10;
 
 const ContactDetail = async (props: any) => {
-  const detailData = await axios.get(
-    `http://127.0.0.1:8000/contacts/${props.params.contactid}`
-  );
+   const data = await fetch(
+     `http://127.0.0.1:8000/contacts/${props.params.contactid}`,
+     {
+       next: { revalidate: 10 },
+     }
+   );
+   const result = await data.json();
+
 
   return (
     <>
@@ -18,24 +21,22 @@ const ContactDetail = async (props: any) => {
           width={100}
           height={100}
           alt="contact photo"
-          src={detailData.data.data.background}
+          src={result.data.background}
         />
         <div className="mt-5">
           <div>
             <span>phone Number</span>:
-            <span className="ml-3">
-              {detailData.data.data.number}
-            </span>
+            <span className="ml-3">{result.data.number}</span>
           </div>
           <div>
             <span>full Name</span>:
-            <span className="ml-3">{detailData.data.data.name}</span>
+            <span className="ml-3">{result.data.name}</span>
           </div>
         </div>
         <Link
           href={{
             pathname: "/create-contact",
-            query: { contactId: detailData.data.data._id },
+            query: { contactId: result.data._id },
           }}
         >
           <Image

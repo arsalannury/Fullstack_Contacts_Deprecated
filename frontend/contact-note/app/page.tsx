@@ -1,12 +1,11 @@
 import Image from "next/image";
 import Link from "next/link";
-import { BaseURL } from "@/BaseURL";
-import axios from "axios";
-
-export const revalidate = 10;
 
 export default async function Home() {
-  const data = await axios.get("http://127.0.0.1:8000/contacts");
+  const data = await fetch("http://127.0.0.1:8000/contacts", {
+    next: { revalidate: 10 },
+  });
+  const result = await data.json();
 
   return (
     <>
@@ -30,8 +29,8 @@ export default async function Home() {
         </Link>
       </div>
       <div>
-        {data?.data?.data.length > 0 ? (
-          data?.data?.data.map((cont: any, index: number) => {
+        {result?.data.length > 0 ? (
+          result?.data.map((cont: any, index: number) => {
             return (
               <>
                 <Link href={`/${cont._id}`}>

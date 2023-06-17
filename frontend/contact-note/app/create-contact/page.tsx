@@ -6,7 +6,7 @@ import React, { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import Upload from "@/components/Form/Upload";
 import getBase64 from "@/helper";
-import { useForm, SubmitHandler } from "react-hook-form";
+import { useForm} from "react-hook-form";
 import { BaseURL } from "@/BaseURL";
 import axios from "axios";
 
