@@ -1,11 +1,12 @@
 import Image from "next/image";
 import Link from "next/link";
 import { BaseURL } from "@/BaseURL";
+import axios from "axios";
 
 export const revalidate = 10;
 
 export default async function Home() {
-  const data = await BaseURL.get("/contacts");
+  const data = await axios.get("http://127.0.0.1:8000/contacts");
 
   return (
     <>

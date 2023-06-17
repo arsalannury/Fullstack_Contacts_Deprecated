@@ -1,4 +1,5 @@
 import { BaseURL } from "@/BaseURL";
+import axios from "axios";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
@@ -6,8 +7,8 @@ import React from "react";
 export const revalidate = 10;
 
 const ContactDetail = async (props: any) => {
-  const detailData = await BaseURL.get(
-    `contacts/${props.params.contactid}`
+  const detailData = await axios.get(
+    `http://127.0.0.1:8000/contacts/${props.params.contactid}`
   );
 
   return (
